@@ -1,0 +1,73 @@
+{
+  "name": "electron-vite-template",
+  "author": "cyaner",
+  "private": true,
+  "version": "1.0.0",
+  "main": "app/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "start": "npm run electron:dev",
+    "postinstall": "electron-builder install-app-deps",
+    "rebuild": "cnpm rebuild --runtime=electron --target=17.1.2 --disturl=https://atom.io/download/atom-shell --abi=101",
+    "packager": "electron-packager ./dist/ --platform=win32 --arch=x64 --overwrite",
+    "electron": "wait-on tcp:3000 && cross-env IS_DEV=true electron .",
+    "electron:dev": "concurrently -k \"cross-env BROWSER=none npm run dev\" \"npm run electron\"",
+    "electron:build.win": "npm run build && electron-builder --win --dir",
+    "electron:build.linux": "npm run build && electron-builder --linux appImage",
+    "electron:build.test": "npm run build && electron-builder --dir",
+    "electron:build.exe": "npm run build && electron-builder --win",
+    "electron:build": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.2.0",
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^17.3.0",
+    "electron-builder": "^22.14.13",
+    "electron-packager": "^15.4.0",
+    "electron-rebuild": "^3.2.7",
+    "electron-store": "^8.0.1",
+    "vite": "^2.8.0",
+    "wait-on": "^6.0.1"
+  },
+  "build": {
+    "productName": "electron-vite-template",
+    "copyright": "Copyright © 2022 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "output": "dist_electron"
+    },
+    "extraResources": [
+      {
+        "from": "app/assets/",
+        "to": "./assets"
+      }
+    ],
+    "electronDownload": {
+      "mirror": "https://npm.taobao.org/mirrors/electron/"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "app/assets/app.png"
+    }
+  },
+  "portable": {
+    "unicode": false
+  },
+  "__npminstall_done": false
+}

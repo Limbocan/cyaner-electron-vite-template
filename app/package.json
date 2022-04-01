@@ -1,0 +1,13 @@
+{
+  "name": "electron-vite-template",
+  "author": "mocan",
+  "private": true,
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "install": "^0.13.0"
+  }
+}
