@@ -1,16 +1,19 @@
 const { app, ipcMain } = require('electron')
-const { getCurrWin, aboutWindow } = require('./set-window')
+const { getCurrWin } = require('./set-window')
 
 // 接收渲染进程消息
 ipcMain.on('message', async (event, arg) => {
+  // 获取当前消息窗口
   const win = getCurrWin()
   const handlerName = arg?.handler || arg
+  // 判断是否有注册改消息的处理方法
   if (!handlerNames.includes(handlerName)) {
     sendMsg(win, 'message', `${handlerName} not found`)
     return false
   }
   const handlerFn = handler[handlerName]
   const msg = await handlerFn(win, arg)
+  // 处理完成后发送结果给页面，回调消息名称为消息处理名称
   sendMsg(win, handlerName, { handler: handlerName, msg })
 })
 
@@ -41,15 +44,11 @@ const handler = {
   },
   // 重新加载页面
   winReload: async (win = {}) => win.reload(),
-  // 查看关于窗口
-  showAbout: async (win = {}) => {
-    aboutWindow(win)
-  },
 }
 // 所有已注册方法列表
 const handlerNames = Object.keys(handler)
 
-// 从窗口发送消息
+// 从主进程发送消息到页面
 const sendMsg = (win = null, type = 'message', msg) => {
   const curWin = win || getCurrWin()
   if (!curWin || !curWin?.isFocused?.()) return

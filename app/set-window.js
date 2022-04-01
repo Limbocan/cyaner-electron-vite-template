@@ -36,7 +36,7 @@ const createWindow = () => {
     // opacity: 0.8, // 窗口透明度 setOpacity可修改（0.0 - 1.0）
     webPreferences: {
       // nodeIntegration: true,
-      devTools: isDev ? true : false,
+      devTools: isDev,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -45,11 +45,7 @@ const createWindow = () => {
 
   // 加载html页面
   // win.loadFile('index1.html')
-  win.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, 'dist/index.html')}`
-  )
+  win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, 'dist/index.html')}`)
 
   // 页面可加载时显示窗口（控制白屏）
   win.once('ready-to-show', () => {
@@ -116,35 +112,9 @@ const showLoading = () => {
   })
 }
 
-// 关于窗口
-const aboutWindow = (topWin) => {
-  const about = new BrowserWindow({
-    parent: topWin, // 子窗口
-    modal: true, // 模态窗口
-    width: 300,
-    height: 200,
-    icon: nativeImage.createFromPath(iconPath),
-    autoHideMenuBar: true,
-    resizable: false,
-    fullscreenable: false,
-    minimizable: false,
-    maximizable: false,
-    webPreferences: {
-      devTools: false,
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
-  about.setMenu(null)
-  about.loadFile(isDev ? './app/about.html' : path.join(__dirname, './about.html'))
-  about.show()
-
-  about.on('close', () => topWin.show())
-}
-
 module.exports = {
   wins,
   getCurrWin,
   showLoading,
   createWindow,
-  aboutWindow
 }

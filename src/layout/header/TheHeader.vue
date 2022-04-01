@@ -14,10 +14,6 @@ import TheTools from './TheTools.vue'
 
 const route = useRoute()
 
-window.$electron.onMessage('winMove', () => closeMenu())
-window.$electron.onMessage('maxScreen', () => closeMenu())
-window.$electron.onMessage('minScreen', () => closeMenu())
-
 </script>
 
 <style lang="scss" scoped>
@@ -33,6 +29,21 @@ header {
   color: #fff;
   background-color: var(--theme-color);
   user-select: none;
+}
+
+.menu-bar {
+  height: 100%;
+  .app-logo {
+    -webkit-app-region: drag;
+    height: 100%;
+    line-height: var(--header-height);
+    background-image: url('../../assets/app.ico');
+    width: 30px;
+    background-position: center;
+    background-size: contain;
+    margin: 0 10px 0 6px;
+    background-repeat: no-repeat;
+  }
 }
 
 .space-div {

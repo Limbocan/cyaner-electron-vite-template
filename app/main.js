@@ -17,6 +17,7 @@ app.setUserTasks([
 
 // app载入
 app.whenReady().then(() => {
+  // 创建主窗口
   createWindow(app)
 
   app.on('activate', function () {
@@ -25,6 +26,7 @@ app.whenReady().then(() => {
 })
 
 app.on('ready', () => {
+  // 展示loading页面
   showLoading();
 })
 

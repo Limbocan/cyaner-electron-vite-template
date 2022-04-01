@@ -15,7 +15,7 @@ import TheHeader from './header/TheHeader.vue'
 <style lang="scss" scoped>
 .layout-content {
   --header-height: 34px;
-  --body-bg-color: #f5f4fd;
+  --body-bg-color: #d1d1d1;
 
   position: relative;
   height: 100%;
