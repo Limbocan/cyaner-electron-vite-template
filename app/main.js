@@ -3,6 +3,17 @@ const { app, BrowserWindow } = require('electron')
 const { showLoading, createWindow } = require('./set-window')
 require('./message-handler')
 
+// 判断是否已有一个打开的进程
+const gotTheLock = app.requestSingleInstanceLock()
+if (!gotTheLock) {
+  app.quit()
+} else {
+  app.on('second-instance', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    else app.focus()
+  })
+}
+
 // 任务栏右键菜单
 app.setUserTasks([
   {
