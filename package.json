@@ -21,7 +21,7 @@
     "electron:build": "npm run build && electron-builder"
   },
   "dependencies": {
-    "vue": "^3.2.25",
+    "vue": "^3.2.32",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
