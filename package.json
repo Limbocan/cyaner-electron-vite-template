@@ -30,7 +30,7 @@
     "cross-env": "^7.0.3",
     "electron": "^17.3.0",
     "electron-builder": "^22.14.13",
-    "electron-packager": "^15.4.0",
+    "electron-packager": "^15.5.1",
     "electron-rebuild": "^3.2.7",
     "electron-store": "^8.0.1",
     "sass": "^1.49.10",
