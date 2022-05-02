@@ -34,7 +34,7 @@
     "electron-rebuild": "^3.2.7",
     "electron-store": "^8.0.1",
     "sass": "^1.49.10",
-    "vite": "^2.8.0",
+    "vite": "^2.9.7",
     "wait-on": "^6.0.1"
   },
   "build": {
